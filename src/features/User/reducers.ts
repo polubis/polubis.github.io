@@ -22,8 +22,8 @@ const actionsMap: any = {
   [uAT.GET_USER_DETAILS]: (state: AuthState) => ({
     ...state, isFetchingUserData: true
   }),
-  [uAT.GET_USER_DETAILS_SUCCESS]: (state: AuthState, { userDetails }: any) => ({
-    ...state, isFetchingUserData: false, userDetails
+  [uAT.GET_USER_DETAILS_SUCCESS]: (state: AuthState, { payload }: any) => ({
+    ...state, isFetchingUserData: false, userDetails: payload
   }),
   [uAT.GET_USER_DETAILS_FAILURE]: (state: AuthState) => ({
     ...state, isFetchingUserData: false, userDetails: null

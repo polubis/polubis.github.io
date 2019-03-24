@@ -1,0 +1,29 @@
+@import '../../../theme.scss';
+
+@keyframes animate-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  } 
+}
+
+.modal {
+  position: fixed;
+  background: $white;
+  box-shadow: $shadow;
+  z-index: 4;
+}
+
+.backdrop {
+  position: fixed;
+  will-change: opacity;
+  animation: .25s animate-opacity $transition forwards;
+  top: 0;
+  left: 0;
+  background: $backdrop;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}

@@ -4,7 +4,7 @@ import { filter, debounceTime, map, catchError, switchMap, flatMap } from 'rxjs/
 import { from, of } from 'rxjs';
 
 import { RootAction } from 'StoreTypes';
-import { FlickrUser, UserDetails } from 'Entities';
+import { UserDetails } from 'Entities';
 
 import { GET_USER_DETAILS } from './constants';
 import { executeRequest } from '../../api/api';
@@ -17,26 +17,25 @@ export const getUserDetailsEpic: Epic<RootAction, RootAction> = (action$) =>
       debounceTime(250),
       switchMap(action => {
         return from(executeRequest(findByUsername, action.payload)).pipe(
-          flatMap((response: any) => {
-            const user = response.user as FlickrUser;
+          flatMap(({user}: any) => {
             return from(executeRequest(getUserInfo, user.id)).pipe(
               map((info: any) => {
-                const { description, location, iconfarm, iconserver, photosurl } = info.person 
+                const { description, location, iconfarm, iconserver, photosurl } = info.person;
                 const userDetails: UserDetails = {
-                  ...user, description, location, iconfarm, iconserver, photosurl,
-                  buddyIcon: `http://farm${iconfarm}.staticflickr.com/${iconserver}/buddyicons/${user.nsid}.jpg`,
+                  ...user, 
+                  username: user.username._content, 
+                  description: description._content, 
+                  location: location._content, 
+                  iconfarm, iconserver, photosurl,
+                  buddyIcon: `https://www.flickr.com/buddyicons/${user.nsid}.jpg`,
                   bannerImg: ''
-                }
-                console.log(info.person);
-                console.log(userDetails);
-                
-                return getUserDetailsSuccess();
+                };
+                return getUserDetailsSuccess(userDetails);
               })
             )
           }),
           catchError(err => of(getUserDetailsFailure()))
         )
       }
-       
       )
     );
