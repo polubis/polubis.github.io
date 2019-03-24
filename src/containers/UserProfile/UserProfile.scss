@@ -1,0 +1,44 @@
+@import '../../theme.scss';
+
+.user-profile {
+  min-height: 100vh;
+  header {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 28vh;
+    justify-content: flex-end;
+    animation: 20s animate-bg linear infinite;
+    position: relative;
+    @keyframes animate-bg {
+      0% {
+        background-position: center;
+      }
+      50% {
+        background-position: top;
+      }
+      100% {
+        background-position: center;
+      }
+    }
+    figure {
+      position: absolute;
+      background: rgba(256,256,256,.6);
+      border-radius: 50%;
+      padding: 7.5px;
+      left: 30px;
+      bottom: -90px;
+      margin: 0;
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+        width: 125px;
+        max-height: auto;
+      }
+    }
+  }
+
+  main {
+    padding: 50px;
+  }
+}

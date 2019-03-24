@@ -1,0 +1,19 @@
+@import '../../../theme.scss';
+
+.profile-navigation {
+  background: $green-light;
+  padding: 9px 30px 10px 30px;
+  border-top: 1px solid $white;
+  color: $white;
+  justify-content: flex-end;
+  a {
+    display: flex;
+    padding: 10px;
+    border-radius: 50%;
+    margin-left: 15px;
+    border: 1px solid transparent;
+  }
+  .focused-icon {
+    border-color: $white;
+  }
+}
